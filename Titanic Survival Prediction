@@ -1,0 +1,37 @@
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+titanic = sns.load_dataset('titanic')
+titanic.head()
+
+titanic.shape
+
+titanic.describe()
+
+titanic['survived'].value_counts()
+
+sns.countplot(titanic['survived'], label="count")
+
+cols=['who','sex','pclass','sibsp','parch','embarked']
+n_rows = 2 
+n_cols = 2
+#The subplot grid and the figure size of each graph.
+#This returns a Figure(Fig) and Axes object(axs)
+fig,axs= plt.subplots(n_rows, n_cols, figsize=(n_cols*3.2, n_rows*3.2))
+for r in range(0, n_rows):
+    for c in range(0, n_cols):
+        i = r*n_cols + c #index to go through the no. of columns
+        ax=axs[r][c] #show where to position each subplot
+        sns.countplot(titanic[cols[i]], hue= titanic["survived"], ax=ax)
+        ax.set_title(cols[i])
+        ax.legend(title="survived", loc='upper right')
+    plt.tight_layout()
+    
+    titanic.groupby('sex')["survived"].mean()
+    
+    
+    
+    
+    
